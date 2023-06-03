@@ -1,4 +1,4 @@
-package com.backend.ejemplo_API_REST;
+package com.backend.ejemplo_api_rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

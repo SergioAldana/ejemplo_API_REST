@@ -1,4 +1,4 @@
-package com.backend.ejemplo_API_REST;
+package com.backend.ejemplo_api_rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
