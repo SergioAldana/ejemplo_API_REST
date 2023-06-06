@@ -1,6 +1,6 @@
-package com.backend.ejemplo_api_rest_.domain;
+package com.backend.ejemplo_api_rest.domain;
 
-import com.backend.ejemplo_api_rest_.domain.enumeration.State;
+import com.backend.ejemplo_api_rest.domain.enumeration.State;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
