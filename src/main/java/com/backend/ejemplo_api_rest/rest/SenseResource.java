@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -25,12 +28,32 @@ public class SenseResource {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<SenseDTO> createSense(@Valid @RequestBody SenseDTO senseDTO) throws URISyntaxException {
         if (senseDTO.getId() != null) {
-            throw new BadRequestAlertException("A new tipoDocumento cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new sense cannot already have an ID", ENTITY_NAME, "idexists");
         }
         SenseDTO result = senseService.saveSense(senseDTO);
         return ResponseEntity.created(new URI("/api/sense/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
     }
+
+    @GetMapping("/sense")
+    public List<SenseDTO> getAllSenses() {
+        return senseService.findAllSenses();
+    }
+
+    @GetMapping("/sense/{id}")
+    public ResponseEntity<SenseDTO> getSense(@PathVariable Long id) {
+        SenseDTO senseDTO = senseService.findById(id);
+        return ResponseUtil.wrapOrNotFound(senseDTO);
+    }
+
+    @DeleteMapping("/sense/{id}")
+    public ResponseEntity<Void> deleteSense(@PathVariable Long id) {
+        senseService.deleteById(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+
+
 
 }
