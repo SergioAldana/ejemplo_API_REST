@@ -11,10 +11,11 @@ import java.io.Serializable;
 public class SenseDTO implements Serializable {
 
     private Long id;
+
     @NotNull
     @Size(min = 1, max = 100)
     private String type;
+
     @NotNull
     private State state;
-
 }

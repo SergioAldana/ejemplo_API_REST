@@ -6,7 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SenseRepository extends JpaRepository<Sense, Long> {
-
-
-
 }
