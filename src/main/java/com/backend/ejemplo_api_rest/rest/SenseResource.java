@@ -19,11 +19,11 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class SenseResource {
 
-
     private static final String ENTITY_NAME = "sense";
 
     private final SenseService senseService;
 
+    /*
     @PostMapping("/sense")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<SenseDTO> createSense(@Valid @RequestBody SenseDTO senseDTO) throws URISyntaxException {
@@ -36,11 +36,15 @@ public class SenseResource {
                 .body(result);
     }
 
+     */
+
     @GetMapping("/sense")
     public List<SenseDTO> getAllSenses() {
         return senseService.findAllSenses();
     }
 
+
+    /*
     @GetMapping("/sense/{id}")
     public ResponseEntity<SenseDTO> getSense(@PathVariable Long id) {
         SenseDTO senseDTO = senseService.findById(id);
@@ -52,6 +56,8 @@ public class SenseResource {
         senseService.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+     */
 
 
 
