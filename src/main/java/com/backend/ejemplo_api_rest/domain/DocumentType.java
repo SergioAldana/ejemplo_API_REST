@@ -10,7 +10,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "document_type")
-@Data
+
+//@Data
+
 public class DocumentType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,23 +37,49 @@ public class DocumentType implements Serializable {
     @Column(nullable = false)
     private State state;
 
-    /**
+    /*
      * La relación bidireccional es innecesaria.
      */
 
-    public DocumentType abbreviation(String abbreviation) {
+    /**
+     * Constructor sin parámetros o sin argumentos.
+     * El compilador proporciona este constructor si no se define ninguno.
+     */
+    public DocumentType() {
+    }
+
+    public Long getDocumentTypeId() {
+        return documentTypeId;
+    }
+
+    public void setDocumentTypeId(Long documentTypeId) {
+        this.documentTypeId = documentTypeId;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
-        return this;
     }
 
-    public DocumentType documentName(String documentName) {
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
         this.documentName = documentName;
-        return this;
     }
 
-    public DocumentType state(State state) {
-        this.state = state;
-        return this;
+    public State getState() {
+        return state;
     }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    
 
 }
