@@ -4,7 +4,6 @@ import com.backend.ejemplo_api_rest.domain.enumeration.State;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 
 import java.io.Serializable;
 
@@ -77,7 +76,26 @@ public class DocumentType implements Serializable {
         this.state = state;
     }
 
-    //@EqualsAndHashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        // El "instanceof" también verifica el caso en que "o" sea nulo.
+        if (!(o instanceof DocumentType)) {
+            return false;
+        }
+        /*
+         * Se realiza un casteo (conversión de tipos)
+         * de Object a DocumentType para poder acceder a sus métodos y atributos.
+         */
+        DocumentType documentType = (DocumentType) o;
+        /*
+         * Se compara el ID de ambos objetos.
+         * Si no son nulos y son iguales, los objetos se consideran equivalentes.
+         */
+        return getDocumentTypeId() != null && getDocumentTypeId().equals(documentType.getDocumentTypeId());
+    }
 
     /*
      * En lugar de acceder directamente a los atributos,
