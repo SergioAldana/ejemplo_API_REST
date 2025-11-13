@@ -10,9 +10,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "document_type")
-
-//@Data
-
 public class DocumentType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,11 +34,11 @@ public class DocumentType implements Serializable {
     @Column(nullable = false)
     private State state;
 
-    /*
+    /**
      * La relación bidireccional es innecesaria.
      */
 
-    /**
+    /*
      * Constructor sin parámetros o sin argumentos.
      * El compilador proporciona este constructor si no se define ninguno.
      */
@@ -80,6 +77,23 @@ public class DocumentType implements Serializable {
         this.state = state;
     }
 
-    
+    //@EqualsAndHashCode
+
+    /*
+     * En lugar de acceder directamente a los atributos,
+     * se utilizan los métodos getters para garantizar la compatibilidad con Hibernate.
+     * Además, usar los getters respeta cualquier lógica adicional que estos puedan contener
+     * (transformaciones, validaciones, etc.), asegurando que la salida del método
+     * refleje el estado público real del objeto.
+     */
+    @Override
+    public String toString() {
+        return "DocumentType{" +
+                "documentTypeId=" + getDocumentTypeId() +
+                ", abbreviation'=" + getAbbreviation() + "'" +
+                ", documentName'=" + getDocumentName() + "'" +
+                ", state='" + state + '\'' +
+                "}";
+    }
 
 }
