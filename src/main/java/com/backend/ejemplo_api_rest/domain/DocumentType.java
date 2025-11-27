@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "document_type")
@@ -95,6 +96,19 @@ public class DocumentType implements Serializable {
          * Si no son nulos y son iguales, los objetos se consideran equivalentes.
          */
         return getDocumentTypeId() != null && getDocumentTypeId().equals(documentType.getDocumentTypeId());
+    }
+
+    @Override
+    public int hashCode() {
+        /*
+         * Expresión ternaria: (condición) ? valor si se cumple : valor si no se cumple.
+         * Simplemente es una forma compacta de escribir un if / else.
+         */
+        return (getDocumentTypeId() != null) ? getDocumentTypeId().hashCode() : 0;
+        /*
+         * La API de Java dispone de una alternativa equivalente que genera hashCodes.
+         * return Objects.hash(getDocumentTypeId());
+         */
     }
 
     /*
