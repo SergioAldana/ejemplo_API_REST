@@ -55,5 +55,42 @@ public class DocumentTypeService {
      * Registro para el administrador, sin validaciones, ni seguridad (opcional).
      * createDocumentType
      */
-    
+
+    public DocumentTypeDTO updateDocumentType(Long id, DocumentTypeDTO documentTypeDTO) {
+        LOGGER.debug("ID: {}\n" + "Información actualizada para Tipo de Documento: {}", id, documentTypeDTO);
+
+        // El ID proviene directamente de la URL, no del ID del DTO.
+
+        if (documentTypeDTO.getDocumentTypeId() != null && !documentTypeDTO.getDocumentTypeId().equals(id)) {
+            throw new IllegalArgumentException("El ID del DTO no coincide con el ID de la URL");
+        }
+
+        /*
+         * Conversión desde el DTO ⇾ a la Entidad.
+         *
+         * Si no encuentra un Tipo de Documento con ese ID, se lanza una excepción.
+         * Si sí se encuentra, devuelve la entidad y la guarda en existingDocumentType.
+         */
+        DocumentType existingDocumentType = documentTypeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encuentra el Tipo de Documento con ID: " + id));
+
+        existingDocumentType.setAbbreviation(documentTypeDTO.getAbbreviation());
+        existingDocumentType.setDocumentName(documentTypeDTO.getDocumentName());
+        existingDocumentType.setState(documentTypeDTO.getState());
+
+        DocumentType updatedDocumentType = documentTypeRepository.save(existingDocumentType);
+
+        /*
+         * Conversión desde la Entidad ⇾ al DTO.
+         */
+        DocumentTypeDTO updatedDocumentTypeDTO = new DocumentTypeDTO();
+
+        updatedDocumentTypeDTO.setDocumentTypeId(updatedDocumentType.getDocumentTypeId());
+        updatedDocumentTypeDTO.setAbbreviation(updatedDocumentType.getAbbreviation());
+        updatedDocumentTypeDTO.setDocumentName(updatedDocumentType.getDocumentName());
+        updatedDocumentTypeDTO.setState(updatedDocumentType.getState());
+
+        return updatedDocumentTypeDTO;
+    }
+
 }
