@@ -1,22 +1,19 @@
 package com.backend.ejemplo_api_rest.service.dto;
 
-import com.backend.ejemplo_api_rest.domain.DocumentType;
 import com.backend.ejemplo_api_rest.domain.enumeration.State;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
 
 import java.io.Serializable;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
 public class DocumentTypeDTO implements Serializable {
+
+    /*
+     * En Java, cuando una clase implementa Serializable,
+     * es recomendable declarar manualmente un serialVersionUID.
+     * Buena práctica defensiva.
+     */
+    private static final long serialVersionUID = 1L;
 
     private Long documentTypeId;
 
@@ -30,5 +27,50 @@ public class DocumentTypeDTO implements Serializable {
 
     @NotNull
     private State state;
+
+    public DocumentTypeDTO() {
+    }
+
+    public Long getDocumentTypeId() {
+        return documentTypeId;
+    }
+
+    public void setDocumentTypeId(Long documentTypeId) {
+        this.documentTypeId = documentTypeId;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "DocumentType{" +
+                "documentTypeId=" + getDocumentTypeId() +
+                ", abbreviation'=" + getAbbreviation() + "'" +
+                ", documentName'=" + getDocumentName() + "'" +
+                ", state='" + getState() + "'" +
+                "}";
+    }
 
 }
