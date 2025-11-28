@@ -9,6 +9,22 @@ import java.io.Serializable;
 public class DocumentTypeDTO implements Serializable {
 
     /*
+     * Anotaciones que NO deberían ir en el DTO:
+     * @Entity
+     * @Table
+     * @Id
+     * @GeneratedValue
+     * @Column
+     * @Enumerated
+     * @OneToMany, @ManyToOne
+     * @JoinColumn
+     * @CreationTimestamp
+     * @UpdateTimestamp
+     * Estas pertenecen a la entidad, porque define cómo la clase se persiste en la base de datos.
+     * El DTO no tiene relación con la base de datos, por lo que incluirlas sería incorrecto.
+     */
+
+    /*
      * En Java, cuando una clase implementa Serializable,
      * es recomendable declarar manualmente un serialVersionUID.
      * Buena práctica defensiva.
