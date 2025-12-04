@@ -120,6 +120,20 @@ public class DocumentTypeService {
         return documentTypeDTOs;
     }
 
+    public DocumentTypeDTO getDocumentTypeById(Long id) {
+        DocumentType documentType = documentTypeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encuentra el Tipo de Documento con ID: " + id));
+
+        DocumentTypeDTO documentTypeDTO = new DocumentTypeDTO();
+
+        documentTypeDTO.setDocumentTypeId(documentType.getDocumentTypeId());
+        documentTypeDTO.setAbbreviation(documentType.getAbbreviation());
+        documentTypeDTO.setDocumentName(documentType.getDocumentName());
+        documentTypeDTO.setState(documentType.getState());
+
+        return documentTypeDTO;
+    }
+
     public void deleteDocumentType(Long id) {
         /*
          * La verificación del ID difiere al del método updateDocumentType(findById),
