@@ -13,24 +13,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class DocumentTypeService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentTypeService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DocumentTypeService.class);
 
     private final DocumentTypeRepository documentTypeRepository;
+
+    public DocumentTypeService(DocumentTypeRepository documentTypeRepository) {
+        this.documentTypeRepository = documentTypeRepository;
+    }
 
     /**
      * Registro para el usuario final, validaciones y seguridad.
      */
     public DocumentTypeDTO registerDocumentType(DocumentTypeDTO documentTypeDTO) {
-        LOGGER.debug("Información creada para Tipo de Documento: {}", documentTypeDTO);
+        LOG.debug("Información creada para Tipo de Documento: {}", documentTypeDTO);
 
         /*
          * Conversión desde el DTO ⇾ a la Entidad.
          */
         DocumentType newDocumentType = new DocumentType();
-
         newDocumentType.setDocumentTypeId(documentTypeDTO.getDocumentTypeId());
         newDocumentType.setAbbreviation(documentTypeDTO.getAbbreviation());
         newDocumentType.setDocumentName(documentTypeDTO.getDocumentName());
@@ -57,7 +59,7 @@ public class DocumentTypeService {
      */
 
     public DocumentTypeDTO updateDocumentType(Long id, DocumentTypeDTO documentTypeDTO) {
-        LOGGER.debug("ID: {}\n" + "Información actualizada para Tipo de Documento: {}", id, documentTypeDTO);
+        LOG.debug("ID: {}\n" + "Información actualizada para Tipo de Documento: {}", id, documentTypeDTO);
 
         // El ID proviene directamente de la URL, no del ID del DTO.
 
@@ -91,6 +93,18 @@ public class DocumentTypeService {
         updatedDocumentTypeDTO.setState(updatedDocumentType.getState());
 
         return updatedDocumentTypeDTO;
+    }
+    
+    public void deleteDocumentType(Long id) {
+        /*
+         * La verificación del ID difiere al del método updateDocumentType(findById),
+         * ya que deleteDocumentType(deleteById) devuelve un void y no un Optional.
+         */
+        if (!documentTypeRepository.existsById(id)) {
+            throw new EntityNotFoundException("No se encuentra el Tipo de Documento con ID: " + id);
+        }
+        documentTypeRepository.deleteById(id);
+        LOG.debug("Tipo de Documento eliminado: {}", id);
     }
 
 }
