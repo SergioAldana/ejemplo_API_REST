@@ -4,7 +4,6 @@ import com.backend.ejemplo_api_rest.domain.DocumentType;
 import com.backend.ejemplo_api_rest.repository.DocumentTypeRepository;
 import com.backend.ejemplo_api_rest.service.dto.DocumentTypeDTO;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,6 +32,7 @@ public class DocumentTypeService {
          * Conversión desde el DTO ⇾ a la Entidad.
          */
         DocumentType newDocumentType = new DocumentType();
+
         newDocumentType.setDocumentTypeId(documentTypeDTO.getDocumentTypeId());
         newDocumentType.setAbbreviation(documentTypeDTO.getAbbreviation());
         newDocumentType.setDocumentName(documentTypeDTO.getDocumentName());
@@ -94,7 +94,32 @@ public class DocumentTypeService {
 
         return updatedDocumentTypeDTO;
     }
-    
+
+    public List<DocumentTypeDTO> getAllDocumentTypes() {
+        List<DocumentType> documentTypes = documentTypeRepository.findAll();
+        // Creación de una lista vacía para almacenar los DTO.
+        List<DocumentTypeDTO> documentTypeDTOs = new ArrayList<>();
+
+        for (int i = 0; i < documentTypes.size(); i++) {
+            /*
+             * Se delimitan los valores de cada objeto de Tipo de Documento de acuerdo
+             * a la posición del índice "i".
+             */
+            DocumentType documentType = documentTypes.get(i);
+            DocumentTypeDTO documentTypeDTO = new DocumentTypeDTO();
+
+            // Se copian los datos desde la entidad ⇾ al DTO, uno por uno.
+            documentTypeDTO.setDocumentTypeId(documentType.getDocumentTypeId());
+            documentTypeDTO.setAbbreviation(documentType.getAbbreviation());
+            documentTypeDTO.setDocumentName(documentType.getDocumentName());
+            documentTypeDTO.setState(documentType.getState());
+
+            documentTypeDTOs.add(documentTypeDTO);
+        }
+
+        return documentTypeDTOs;
+    }
+
     public void deleteDocumentType(Long id) {
         /*
          * La verificación del ID difiere al del método updateDocumentType(findById),
