@@ -32,4 +32,21 @@ public class DocumentTypeResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(newDocumentTypeDTO);
     }
 
+    //build en el controlador?
+    @GetMapping("")
+    public List<DocumentTypeDTO> getAllDocumentTypes() {
+        LOG.debug("Solicitud REST para obtener todos los Tipos de Documento");
+
+        return documentTypeService.getAllDocumentTypes();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DocumentTypeDTO> getDocumentType(@PathVariable("id") Long id) {
+        LOG.debug("Solicitud REST para obtener un Tipo de Documento: {}", id);
+
+        DocumentTypeDTO documentTypeDTO = documentTypeService.getDocumentTypeById(id);
+
+        return ResponseEntity.ok(documentTypeDTO);
+    }
+
 }
