@@ -34,5 +34,29 @@ public class Gender implements Serializable {
 
     public Gender() {
     }
-    
+
+    public Long getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(Long genderId) {
+        this.genderId = genderId;
+    }
+
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
 }
