@@ -61,4 +61,13 @@ public class DocumentTypeResource {
         return ResponseEntity.ok(documentTypeDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDocumentType(@PathVariable("id") Long id) {
+        LOG.debug("Solicitud REST para borrar un Tipo de Documento: {}", id);
+
+        documentTypeService.deleteDocumentType(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
