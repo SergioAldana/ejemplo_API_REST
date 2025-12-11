@@ -32,7 +32,19 @@ public class DocumentTypeResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(newDocumentTypeDTO);
     }
 
-    //build en el controlador?
+    @PutMapping("/{id}")
+    public ResponseEntity<DocumentTypeDTO> updateDocumentType(
+            @PathVariable(name = "id") Long id,
+            @Valid @RequestBody DocumentTypeDTO documentTypeDTO) {
+        LOG.debug("ID: {}\n" + "Solicitud REST para actualizar un Tipo de Documento: {}", id, documentTypeDTO);
+
+        // El ID proviene directamente de la URL, no del ID del DTO.
+
+        DocumentTypeDTO updatedDocumentTypeDTO = documentTypeService.updateDocumentType(id, documentTypeDTO);
+
+        return ResponseEntity.ok(updatedDocumentTypeDTO);
+    }
+
     @GetMapping("")
     public List<DocumentTypeDTO> getAllDocumentTypes() {
         LOG.debug("Solicitud REST para obtener todos los Tipos de Documento");
