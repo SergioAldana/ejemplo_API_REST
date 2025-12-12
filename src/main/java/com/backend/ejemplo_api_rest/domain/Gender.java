@@ -76,4 +76,14 @@ public class Gender implements Serializable {
         return (getGenderId() != null) ? getGenderId().hashCode() : 0;
     }
 
+    @Override
+    public String toString() {
+        return "Gender{" +
+                "genderId=" + getGenderId() +
+                ", documentName'=" + getDocumentName() + "'" +
+                ", state'=" + getState() + "'" +
+                "}";
+
+    }
+
 }
