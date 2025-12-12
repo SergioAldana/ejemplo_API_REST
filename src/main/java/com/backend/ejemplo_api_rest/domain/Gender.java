@@ -59,4 +59,21 @@ public class Gender implements Serializable {
         this.state = state;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Gender)) {
+            return false;
+        }
+        Gender gender = (Gender) o;
+        return getGenderId() != null && getGenderId().equals(gender.getGenderId());
+    }
+
+    @Override
+    public int hashCode() {
+        return (getGenderId() != null) ? getGenderId().hashCode() : 0;
+    }
+
 }
