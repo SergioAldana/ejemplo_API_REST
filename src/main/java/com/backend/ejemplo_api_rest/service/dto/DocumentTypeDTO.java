@@ -81,7 +81,7 @@ public class DocumentTypeDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "DocumentType{" +
+        return "DocumentTypeDTO{" +
                 "documentTypeId=" + getDocumentTypeId() +
                 ", abbreviation'=" + getAbbreviation() + "'" +
                 ", documentName'=" + getDocumentName() + "'" +

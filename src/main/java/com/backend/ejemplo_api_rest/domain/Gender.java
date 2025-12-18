@@ -20,9 +20,8 @@ public class Gender implements Serializable {
 
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "gender_name", length = 50, nullable = false, unique = true)
-    private String documentName;
-
+    @Column(name = "gender_identity", length = 50, nullable = false, unique = true)
+    private String genderIdentity;
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -43,12 +42,12 @@ public class Gender implements Serializable {
         this.genderId = genderId;
     }
 
-    public String getDocumentName() {
-        return documentName;
+    public String getGenderIdentity() {
+        return genderIdentity;
     }
 
-    public void setDocumentName(String documentName) {
-        this.documentName = documentName;
+    public void setGenderIdentity(String genderIdentity) {
+        this.genderIdentity = genderIdentity;
     }
 
     public State getState() {
@@ -80,7 +79,7 @@ public class Gender implements Serializable {
     public String toString() {
         return "Gender{" +
                 "genderId=" + getGenderId() +
-                ", documentName'=" + getDocumentName() + "'" +
+                ", genderIdentity'=" + getGenderIdentity() + "'" +
                 ", state'=" + getState() + "'" +
                 "}";
 
