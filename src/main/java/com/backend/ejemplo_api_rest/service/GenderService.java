@@ -28,4 +28,26 @@ public class GenderService {
         return mapToDTO(savedGender);
     }
 
+    private Gender mapToEntity(GenderDTO DTO) {
+        /*
+         * Conversión desde el DTO ⇾ a la Entidad.
+         */
+        Gender entity = new Gender();
+        entity.setGenderId(DTO.getGenderId());
+        entity.setGenderIdentity(DTO.getGenderIdentity());
+        entity.setState(DTO.getState());
+        return entity;
+    }
+
+    private GenderDTO mapToDTO(Gender entity) {
+        /*
+         * Conversión desde la Entidad ⇾ al DTO.
+         */
+        GenderDTO DTO = new GenderDTO();
+        DTO.setGenderId(entity.getGenderId());
+        DTO.setGenderIdentity(entity.getGenderIdentity());
+        DTO.setState(entity.getState());
+        return DTO;
+    }
+
 }
