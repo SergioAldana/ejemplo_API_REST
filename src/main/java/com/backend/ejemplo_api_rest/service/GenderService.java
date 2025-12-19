@@ -20,6 +20,8 @@ public class GenderService {
 
     /**
      * Registro para el usuario final, validaciones y seguridad.
+     * El método principal de la funcionalidad es el responsable de orquestar
+     * el flujo completo.
      */
     public GenderDTO registerGender(GenderDTO genderDTO) {
         LOG.debug("Información creada para GenderDTO: {}", genderDTO);
@@ -28,21 +30,24 @@ public class GenderService {
         return mapToDTO(savedGender);
     }
 
+    /*
+     * Conversión desde el DTO ⇾ a la Entidad.
+     * Agregar el ID al método generaría problemas de:
+     * Control del dominio
+     * Seguridad
+     * Trazabilidad
+     */
     private Gender mapToEntity(GenderDTO DTO) {
-        /*
-         * Conversión desde el DTO ⇾ a la Entidad.
-         */
         Gender entity = new Gender();
-        entity.setGenderId(DTO.getGenderId());
         entity.setGenderIdentity(DTO.getGenderIdentity());
         entity.setState(DTO.getState());
         return entity;
     }
 
+    /*
+     * Conversión desde la Entidad ⇾ al DTO.
+     */
     private GenderDTO mapToDTO(Gender entity) {
-        /*
-         * Conversión desde la Entidad ⇾ al DTO.
-         */
         GenderDTO DTO = new GenderDTO();
         DTO.setGenderId(entity.getGenderId());
         DTO.setGenderIdentity(entity.getGenderIdentity());
