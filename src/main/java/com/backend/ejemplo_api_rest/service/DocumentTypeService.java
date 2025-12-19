@@ -26,14 +26,12 @@ public class DocumentTypeService {
      * Registro para el usuario final, validaciones y seguridad.
      */
     public DocumentTypeDTO registerDocumentType(DocumentTypeDTO documentTypeDTO) {
-        LOG.debug("Información creada para Tipo de Documento: {}", documentTypeDTO);
+        LOG.debug("Información creada para DocumentTypeDTO: {}", documentTypeDTO);
 
         /*
          * Conversión desde el DTO ⇾ a la Entidad.
          */
         DocumentType newDocumentType = new DocumentType();
-
-        newDocumentType.setDocumentTypeId(documentTypeDTO.getDocumentTypeId());
         newDocumentType.setAbbreviation(documentTypeDTO.getAbbreviation());
         newDocumentType.setDocumentName(documentTypeDTO.getDocumentName());
         newDocumentType.setState(documentTypeDTO.getState());
@@ -44,7 +42,6 @@ public class DocumentTypeService {
          * Conversión desde la Entidad ⇾ al DTO.
          */
         DocumentTypeDTO newDocumentTypeDTO = new DocumentTypeDTO();
-
         newDocumentTypeDTO.setDocumentTypeId(savedDocumentType.getDocumentTypeId());
         newDocumentTypeDTO.setAbbreviation(savedDocumentType.getAbbreviation());
         newDocumentTypeDTO.setDocumentName(savedDocumentType.getDocumentName());
