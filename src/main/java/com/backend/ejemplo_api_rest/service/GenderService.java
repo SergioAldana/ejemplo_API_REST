@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class GenderService {
 
@@ -58,6 +61,21 @@ public class GenderService {
         GenderDTO updatedGenderDTO = mapToDTO(updatedGender);
         LOG.debug("Información de Género actualizada, con ID {}: {}", id, updatedGenderDTO);
         return updatedGenderDTO;
+    }
+
+    public List<GenderDTO> getAllGenders() {
+        List<Gender> genders = genderRepository.findAll();
+        List<GenderDTO> genderDTOs = new ArrayList<>();
+        for (int i = 0; i < genders.size(); i++) {
+            /*
+             * Obtiene el objeto de la posición en la que se encuentre el índice "i" de la lista de Géneros
+             * y lo almacena en la variable gender.
+             */
+            Gender gender = genders.get(i);
+            GenderDTO genderDTO = mapToDTO(gender);
+            genderDTOs.add(genderDTO);
+        }
+        return genderDTOs;
     }
 
     /*
