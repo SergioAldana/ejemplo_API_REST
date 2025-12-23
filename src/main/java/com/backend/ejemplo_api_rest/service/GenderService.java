@@ -49,6 +49,17 @@ public class GenderService {
      * createGender
      */
 
+    public GenderDTO updateGender(Long id, GenderDTO genderDTO) {
+        // El ID proviene directamente de la URL, no del ID del DTO.
+        Gender existingGender = genderRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encuentra el Género con ID: " + id));
+        applyDTOToEntity(genderDTO, existingGender);
+        Gender updatedGender = genderRepository.save(existingGender);
+        GenderDTO updatedGenderDTO = mapToDTO(updatedGender);
+        LOG.debug("Información de Género actualizada, con ID {}: {}", id, updatedGenderDTO);
+        return updatedGenderDTO;
+    }
+
     /*
      * Conversión desde el DTO ⇾ a la Entidad.
      * Agregar el ID al método generaría problemas de:
