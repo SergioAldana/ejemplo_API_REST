@@ -27,11 +27,11 @@ public class GenderService {
     public GenderDTO registerGender(GenderDTO genderDTO) {
         /*
          * Opción 1:
-         * Creación de la instancia en el método principal.
-         * Luego, envío el DTO y la instancia al método ?
+         * Creación de una nueva instancia en el método principal.
+         * Luego, envío del DTO y la instancia al método applyDTOToEntity.
          */
         Gender newGender = new Gender();
-        mapToEntity(genderDTO, newGender);
+        applyDTOToEntity(genderDTO, newGender);
         /*
          * Opción 2:
          * Envío del DTO al método mapToEntity
@@ -55,12 +55,24 @@ public class GenderService {
      * Control del dominio
      * Seguridad
      * Trazabilidad
-     * Una única responsabilidad; mapToEntity SOLO transcribe datos.
+     * Una única responsabilidad; applyDTOToEntity SOLO transcribe datos.
      */
-    private void mapToEntity(GenderDTO DTO, Gender entity) {
+    private void applyDTOToEntity(GenderDTO DTO, Gender entity) {
         entity.setGenderIdentity(DTO.getGenderIdentity());
         entity.setState(DTO.getState());
     }
+    /*
+     * Opción 2:
+     * mapToEntity crea una nueva instancia, transcribe los datos provenientes
+     * y retorna la instancia creada.
+     *
+     * private Gender mapToEntity(GenderDTO DTO) {
+     *     Gender entity = new Gender();
+     *     entity.setGenderIdentity(DTO.getGenderIdentity());
+     *     entity.setState(DTO.getState());
+     *     return entity;
+     * }
+     */
 
     /*
      * Conversión desde la Entidad ⇾ al DTO.
