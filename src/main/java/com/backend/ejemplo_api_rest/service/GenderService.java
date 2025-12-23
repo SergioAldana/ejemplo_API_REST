@@ -40,7 +40,7 @@ public class GenderService {
 
         Gender savedGender = genderRepository.save(newGender);
         GenderDTO newGenderDTO = mapToDTO(savedGender);
-        LOG.debug("Información creada para Género: {}", newGenderDTO);
+        LOG.debug("Información de Género creada: {}", newGenderDTO);
         return newGenderDTO;
     }
 

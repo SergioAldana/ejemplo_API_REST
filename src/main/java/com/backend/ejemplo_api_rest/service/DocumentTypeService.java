@@ -26,8 +26,6 @@ public class DocumentTypeService {
      * Registro para el usuario final, validaciones y seguridad.
      */
     public DocumentTypeDTO registerDocumentType(DocumentTypeDTO documentTypeDTO) {
-        LOG.debug("Información creada para DocumentTypeDTO: {}", documentTypeDTO);
-
         /*
          * Conversión desde el DTO ⇾ a la Entidad.
          */
@@ -47,6 +45,8 @@ public class DocumentTypeService {
         newDocumentTypeDTO.setDocumentName(savedDocumentType.getDocumentName());
         newDocumentTypeDTO.setState(savedDocumentType.getState());
 
+        LOG.debug("Información de Tipo de Documento creada: {}", newDocumentTypeDTO);
+
         return newDocumentTypeDTO;
     }
 
@@ -56,10 +56,7 @@ public class DocumentTypeService {
      */
 
     public DocumentTypeDTO updateDocumentType(Long id, DocumentTypeDTO documentTypeDTO) {
-        LOG.debug("ID: {}\n" + "Información actualizada para Tipo de Documento: {}", id, documentTypeDTO);
-
         // El ID proviene directamente de la URL, no del ID del DTO.
-
         if (documentTypeDTO.getDocumentTypeId() != null && !documentTypeDTO.getDocumentTypeId().equals(id)) {
             throw new IllegalArgumentException("El ID del DTO no coincide con el ID de la URL");
         }
@@ -72,7 +69,6 @@ public class DocumentTypeService {
          */
         DocumentType existingDocumentType = documentTypeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encuentra el Tipo de Documento con ID: " + id));
-
         existingDocumentType.setAbbreviation(documentTypeDTO.getAbbreviation());
         existingDocumentType.setDocumentName(documentTypeDTO.getDocumentName());
         existingDocumentType.setState(documentTypeDTO.getState());
@@ -83,11 +79,12 @@ public class DocumentTypeService {
          * Conversión desde la Entidad ⇾ al DTO.
          */
         DocumentTypeDTO updatedDocumentTypeDTO = new DocumentTypeDTO();
-
         updatedDocumentTypeDTO.setDocumentTypeId(updatedDocumentType.getDocumentTypeId());
         updatedDocumentTypeDTO.setAbbreviation(updatedDocumentType.getAbbreviation());
         updatedDocumentTypeDTO.setDocumentName(updatedDocumentType.getDocumentName());
         updatedDocumentTypeDTO.setState(updatedDocumentType.getState());
+
+        LOG.debug("Información de Tipo de Documento actualizada, con ID {}: {}", id, updatedDocumentTypeDTO);
 
         return updatedDocumentTypeDTO;
     }
